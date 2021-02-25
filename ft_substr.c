@@ -34,6 +34,8 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	j;
 	size_t	range;
 
+	if (!s)
+		return (NULL);
 	j = 0;
 	range = rng((char *)s, start, len);
 	str = malloc(range + 1);

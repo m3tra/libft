@@ -16,14 +16,18 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	unsigned char *arr;
 
-	if (nmemb && size)
+	if (size > 0)
 	{
 		arr = malloc(nmemb * size);
 		if (!arr)
 			return (NULL);
 		ft_memset(arr, 0, nmemb * size);
-		return (arr);
 	}
 	else
-		return (NULL);
+	{
+		arr = malloc(0);
+		if (!arr)
+			return (NULL);
+	}
+	return ((void *)arr);
 }

@@ -74,7 +74,7 @@ static char		*get_word(char *s, char c)
 		word[i] = '\0';
 		return (word);
 	}
-	return ('\0');
+	return (0);
 }
 
 static char		*append(char **arr, char *s, int n, char c)
@@ -94,14 +94,15 @@ char			**ft_split(char const *s, char c)
 	size_t		start;
 	size_t		nb;
 
+	if (s == NULL)
+		return (NULL);
 	str = (char *)s;
 	nb = nb_words((char*)str, c);
-	arr = (char **)malloc(sizeof(char *) * (nb + 1));
+	if (!(arr = (char **)malloc(sizeof(char *) * (nb + 1))))
+		return (NULL);
 	arr[nb] = NULL;
 	if (!nb)
 		return (arr);
-	if (!arr)
-		return (NULL);
 	i = 0;
 	start = spaces(str, c);
 	while (i < nb)

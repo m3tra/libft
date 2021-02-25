@@ -57,6 +57,8 @@ char		*ft_strtrim(char const *s1, char const *set)
 	size_t	end;
 	char	*str;
 
+	if (!s1 || !set)
+		return (NULL);
 	i = 0;
 	while (is_set(s1[i], (char *)set))
 		i++;
