@@ -6,7 +6,7 @@
 /*   By: fporto <fporto-@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:40:32 by fporto            #+#    #+#             */
-/*   Updated: 2021/02/27 05:21:42 by fporto           ###   ########.fr       */
+/*   Updated: 2021/02/27 17:40:28 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
-int		ft_iscntrl(int c);
-int		ft_isgraph(int c);
-int		ft_isxdigit(int c);
-int		ft_isspace(int c);
-int		ft_strcmp(const char *s1, const char *s2);
-char	*ft_strstr(const char *haystack, const char *needle);
 
 #endif
