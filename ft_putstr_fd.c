@@ -6,7 +6,7 @@
 /*   By: fporto <fporto-@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 16:59:11 by fporto            #+#    #+#             */
-/*   Updated: 2021/02/27 16:59:11 by fporto           ###   ########.fr       */
+/*   Updated: 2021/02/27 18:01:43 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ void		ft_putstr_fd(char *s, int fd)
 {
 	size_t	i;
 
-	if (!s || fd < 0)
-		return ;
-	i = 0;
-	while (s[i])
-		ft_putchar_fd(s[i++], fd);
+	if (s && fd > 0)
+	{
+		i = 0;
+		while (s[i])
+			ft_putchar_fd(s[i++], fd);
+	}
 }
