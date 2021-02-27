@@ -1,19 +1,22 @@
-# This is an example Makefile for a countwords program.  This
-# program uses both the scanner module and a counter module.
-# Typing 'make' or 'make count' will create the executable file.
-
-# define some Makefile variables for the compiler and compiler flags
-# to use Makefile variables later in the Makefile: $()
-#
-#  -g    adds debugging information to the executable file
-#  -Wall turns on most, but not all, compiler warnings
-#
-# for C++ define  CC = g++
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fporto <fporto-@student.42.fr>             +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/02/26 13:26:30 by fporto            #+#    #+#              #
+#    Updated: 2021/02/27 17:15:57 by fporto           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 HEAD = libft.h
 NAME = libft.a
+RM = rm -f
+AR = ar rcs
+SO = libft.so
 
 SRCS =	ft_atoi.c \
 		ft_bzero.c \
@@ -46,7 +49,6 @@ SRCS =	ft_atoi.c \
 		ft_split.c \
 		ft_itoa.c \
 		ft_strmapi.c \
-		\
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
@@ -59,51 +61,39 @@ SRCS =	ft_atoi.c \
 		ft_isspace.c \
 		ft_strstr.c
 
-BONUS =
-
-# define the C object files
-#
-# This uses Suffix Replacement within a macro:
-#   $(name:string1=string2)
-# For each word in 'name' replace 'string1' with 'string2'
-# Below we are replacing the suffix .c of all words in the macro SRCS
-# with the .o suffix
+BONUS = ft_lstnew.c \
+		ft_lstadd_front.c \
+		ft_lstsize.c \
+		ft_lstlast.c \
+		ft_lstadd_back.c \
+		ft_lstdelone.c \
+		ft_lstclear.c \
+		ft_lstiter.c \
+		ft_lstmap.c
 
 OBJS = $(SRCS:.c=.o)
-
-# typing 'make' will invoke the first target entry in the file
-# (in this case the default target entry)
-# you can name this target entry anything, but "default" or "all"
-# are the most commonly used names by convention
-# The following part of the makefile is generic; it can be used to
-# build any executable just by changing the definitions above and by
-# deleting dependencies appended to the file from 'make depend'
-
-$(NAME): $(OBJS)
-	ar rcs $@ $^
-
-# this is a suffix replacement rule for building .o's from .c's
-# it uses automatic variables $<: the name of the prerequisite of
-# the rule(a .c file) and $@: the name of the target of the rule (a .o file)
-# (see the gnu make manual section about automatic variables)
+OBJS_BONUS = $(BONUS:.c=.o)
 
 .c.o : $(HEAD)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I.
+
+$(NAME): $(OBJS)
+	$(AR) $(NAME) $(OBJS)
 
 all:	$(NAME)
 
-bonus: $(NAME) $(BONUS)
-	ar rcs $^
+bonus: $(OBJS) $(OBJS_BONUS)
+	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
 
 so:
-	$(CC) -fPIC $(CFLAGS) -c $(SRCS)
-	gcc -shared -o libft.so $(OBJS)
+	$(CC) -fPIC $(CFLAGS) -c $(SRCS) $(BONUS)
+	gcc -shared -o libft.so $(OBJS) $(OBJS_BONUS)
 
 clean:
-	rm -f $(OBJS) *~
+	$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME) $(SO)
 
 re:		fclean all
 

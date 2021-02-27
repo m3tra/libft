@@ -6,7 +6,7 @@
 /*   By: fporto <fporto-@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:45:01 by fporto            #+#    #+#             */
-/*   Updated: 2021/02/24 22:16:13 by fporto           ###   ########.fr       */
+/*   Updated: 2021/02/27 05:00:31 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	if (fd < 0)
-		return ;
-	write(fd, &c, 1);
+	if (fd > 0)
+		write(fd, &c, 1);
 }

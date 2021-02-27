@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporto <fporto-@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 16:34:47 by fporto            #+#    #+#             */
-/*   Updated: 2021/02/11 22:12:59 by fporto           ###   ########.fr       */
+/*   Created: 2021/02/27 16:57:54 by fporto            #+#    #+#             */
+/*   Updated: 2021/02/27 16:57:55 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isspace_bonus(int c)
+void		ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	if(c == ' ' || c == '\f' || c == '\n' || c == '\r' \
-	|| c == '\t' || c == '\v')
+	t_list	*list;
+
+	if (*lst && del)
 	{
-		return 1;
+		while (*lst)
+		{
+			list = *lst;
+			*lst = (*lst)->next;
+			ft_lstdelone(list, del);
+		}
 	}
-	else
-		return 0;
 }

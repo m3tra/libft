@@ -6,7 +6,7 @@
 /*   By: fporto <fporto-@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:21:53 by fporto            #+#    #+#             */
-/*   Updated: 2021/02/24 22:10:23 by fporto           ###   ########.fr       */
+/*   Updated: 2021/02/27 16:59:26 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,19 +98,19 @@ char			**ft_split(char const *s, char c)
 		return (NULL);
 	str = (char *)s;
 	nb = nb_words((char*)str, c);
-	if (!(arr = (char **)malloc(sizeof(char *) * (nb + 1))))
+	arr = (char **)malloc(sizeof(char *) * (nb + 1));
+	if (!arr)
 		return (NULL);
 	arr[nb] = NULL;
 	if (!nb)
 		return (arr);
-	i = 0;
+	i = (size_t)-1;
 	start = spaces(str, c);
-	while (i < nb)
+	while (++i < nb)
 	{
 		arr[i] = append(arr, str + start, i, c);
 		start += (ft_strlen(arr[i]));
 		start += spaces(str + start, c);
-		i++;
 	}
 	return (arr);
 }

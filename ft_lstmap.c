@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporto <fporto-@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/27 16:59:11 by fporto            #+#    #+#             */
-/*   Updated: 2021/02/27 16:59:11 by fporto           ###   ########.fr       */
+/*   Created: 2021/02/27 16:58:05 by fporto            #+#    #+#             */
+/*   Updated: 2021/02/27 16:58:06 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_putstr_fd(char *s, int fd)
+t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	size_t	i;
+	t_list	*curr;
+	t_list	*ret;
 
-	if (!s || fd < 0)
-		return ;
-	i = 0;
-	while (s[i])
-		ft_putchar_fd(s[i++], fd);
+	if (lst)
+	{
+		curr = ft_lstnew(f(lst->content));
+		ret = curr;
+		while (lst->next && curr)
+		{
+			lst = lst->next;
+			curr->next = ft_lstnew(f(lst->content));
+			curr = curr->next;
+		}
+		if (!curr)
+		{
+			ft_lstclear(&ret, del);
+			return (NULL);
+		}
+		return (ret);
+	}
+	return (NULL);
 }
