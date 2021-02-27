@@ -6,7 +6,7 @@
 #    By: fporto <fporto-@student.42.fr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/26 13:26:30 by fporto            #+#    #+#              #
-#    Updated: 2021/02/27 17:15:57 by fporto           ###   ########.fr        #
+#    Updated: 2021/02/27 17:35:25 by fporto           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,14 +52,7 @@ SRCS =	ft_atoi.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
-		ft_putnbr_fd.c \
-		\
-		ft_strcmp.c \
-		ft_iscntrl.c \
-		ft_isgraph.c \
-		ft_isxdigit.c \
-		ft_isspace.c \
-		ft_strstr.c
+		ft_putnbr_fd.c
 
 BONUS = ft_lstnew.c \
 		ft_lstadd_front.c \
@@ -85,15 +78,11 @@ all:	$(NAME)
 bonus: $(OBJS) $(OBJS_BONUS)
 	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
 
-so:
-	$(CC) -fPIC $(CFLAGS) -c $(SRCS) $(BONUS)
-	gcc -shared -o libft.so $(OBJS) $(OBJS_BONUS)
-
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	$(RM) $(NAME) $(SO)
+	$(RM) $(NAME)
 
 re:		fclean all
 
