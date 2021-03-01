@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fporto <fporto-@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:35:04 by fporto            #+#    #+#             */
-/*   Updated: 2021/02/15 15:02:33 by fporto           ###   ########.fr       */
+/*   Updated: 2021/03/01 19:57:16 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,19 @@ int			ft_atoi(const char *s)
 	result = 0;
 	while (*s && (isspace(*s)))
 		s++;
-	while (*s != '\0')
+	if (*s && *s == '-')
 	{
-		if (*s == '-' && neg == 1 && pos == 0)
-			neg *= -1;
-		else if (*s == '+' && pos == 0 && neg == 1)
-			pos = 1;
-		else if (ft_isdigit(*s) && result == 0)
-			result = *s - '0';
-		else if (ft_isdigit(*s) && result != 0)
-			result = result * 10 + (*s - '0');
-		else
-			break ;
+		neg *= -1;
 		s++;
 	}
+	if (*s && *s == '+')
+	{
+		pos = 1;
+		s++;
+	}
+	if (neg == -1 && pos == 1)
+		return (result);
+	while (ft_isdigit(*s))
+		result = result * 10 + (*s++ - '0');
 	return (result * neg);
 }
