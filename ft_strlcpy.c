@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fporto <fporto-@student.42.fr>             +#+  +:+       +#+        */
+/*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:35:32 by fporto            #+#    #+#             */
-/*   Updated: 2021/02/25 19:43:25 by fporto           ###   ########.fr       */
+/*   Updated: 2021/03/11 17:23:25 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t		ft_strlcpy(char *dest, const char *src, size_t size)
 	size_t	i;
 
 	i = 0;
+	if (!dest || !src)
+		return (0);
 	if (size)
 	{
 		while (i < size - 1 && src[i])
